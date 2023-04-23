@@ -32,15 +32,16 @@ class UserSeeder extends Seeder
             //     'created_at' => Carbon::now(),
             //     'updated_at' => Carbon::now()
             // ],
-            // [
-            //     'name' => 'C',
-            //     'email' => 'user3@gmail.com',
-            //     'password' => Hash::make('123456'),
-            //     'created_at' => Carbon::now(),
-            //     'updated_at' => Carbon::now()
-            // ],
             [
-                'name' => 'staff1',
+                'name' => 'C',
+                'email' => 'user3@gmail.com',
+                'password' => Hash::make('123456'),
+                'role' => 'staff',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Nhân viên 1',
                 'email' => 'user' . Str::random(8) . '3@gmail.com',
                 'password' => Hash::make('123456'),
                 'role' => 'staff',
@@ -48,7 +49,7 @@ class UserSeeder extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'staff2',
+                'name' => 'Nhân viên 2',
                 'email' => 'user' . Str::random(8) . '3@gmail.com',
                 'password' => Hash::make('123456'),
                 'role' => 'staff',
@@ -56,7 +57,7 @@ class UserSeeder extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'staff3',
+                'name' => 'Nhân viên 3',
                 'email' => 'user' . Str::random(8) . '3@gmail.com',
                 'password' => Hash::make('123456'),
                 'role' => 'staff',
@@ -64,7 +65,7 @@ class UserSeeder extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'staff4',
+                'name' => 'Nhân viên 4',
                 'email' => 'user' . Str::random(8) . '3@gmail.com',
                 'password' => Hash::make('123456'),
                 'role' => 'staff',
@@ -72,7 +73,7 @@ class UserSeeder extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'staff5',
+                'name' => 'Nhân viên 5',
                 'email' => 'user' . Str::random(8) . '3@gmail.com',
                 'password' => Hash::make('123456'),
                 'role' => 'staff',

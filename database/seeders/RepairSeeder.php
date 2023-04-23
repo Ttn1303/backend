@@ -19,7 +19,8 @@ class RepairSeeder extends Seeder
             [
                 'customer_id' => 1,
                 'vehicle_infor_id' => 1,
-                'state' => 'Tiếp nhận',
+                'code' => 'PSC00011',
+                'state' => 0,
                 'user_id' => 1,
                 'appointmentdate' => '2023-04-05 06:27:03',
                 'note' => '',
@@ -32,7 +33,8 @@ class RepairSeeder extends Seeder
             [
                 'customer_id' => 2,
                 'vehicle_infor_id' => 2,
-                'state' => 'Tiếp nhận',
+                'code' => 'PSC00011',
+                'state' => 1,
                 'user_id' => 2,
                 'appointmentdate' => '2023-04-05 06:27:03',
                 'note' => '',
@@ -45,7 +47,8 @@ class RepairSeeder extends Seeder
             [
                 'customer_id' => 3,
                 'vehicle_infor_id' => 3,
-                'state' => 'Tiếp nhận',
+                'code' => 'PSC00011',
+                'state' => 2,
                 'user_id' => 3,
                 'appointmentdate' => '2023-04-05 06:27:03',
                 'note' => '',
@@ -54,7 +57,49 @@ class RepairSeeder extends Seeder
                 'customerRequest' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
-            ]
+            ],
+            [
+                'customer_id' => 4,
+                'vehicle_infor_id' => 4,
+                'code' => 'PSC00044',
+                'state' => 0,
+                'user_id' => 4,
+                'appointmentdate' => '2023-04-05 06:27:03',
+                'note' => '',
+                'service' => 'Bảo dưỡng',
+                'vehicleCondition' => '',
+                'customerRequest' => '',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'customer_id' => 5,
+                'vehicle_infor_id' => 5,
+                'code' => 'PSC00055',
+                'state' => 0,
+                'user_id' => 5,
+                'appointmentdate' => '2023-04-05 06:27:03',
+                'note' => '',
+                'service' => 'Bảo dưỡng',
+                'vehicleCondition' => '',
+                'customerRequest' => '',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'customer_id' => 6,
+                'vehicle_infor_id' => 6,
+                'code' => 'PSC00066',
+                'state' => 0,
+                'user_id' => 6,
+                'appointmentdate' => '2023-04-05 06:27:03',
+                'note' => '',
+                'service' => 'Bảo dưỡng',
+                'vehicleCondition' => '',
+                'customerRequest' => '',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
         ]);
     }
 }

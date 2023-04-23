@@ -13,4 +13,8 @@ class Customer extends Model
         'age',
         'sex'
     ];
+    public function Repairs()
+    {
+        return $this->hasMany(Repair::class, 'customer_id');
+    }
 }

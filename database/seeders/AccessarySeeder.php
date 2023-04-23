@@ -15,7 +15,7 @@ class AccessarySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('accessarys')->insert([
+        DB::table('accessaries')->insert([
             [
                 'accessary_group_id' => 1,
                 'code' => 'LEDPANEL12W',

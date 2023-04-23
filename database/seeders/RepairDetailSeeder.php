@@ -36,6 +36,27 @@ class RepairDetailSeeder extends Seeder
                 'quantity'=>2,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
+            ],
+            [
+                'repair_id' => 4,
+                'accessary_id' => 3,
+                'quantity'=>2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'repair_id' => 5,
+                'accessary_id' => 3,
+                'quantity'=>2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'repair_id' => 6,
+                'accessary_id' => 3,
+                'quantity'=>2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ]
         ]);
     }
