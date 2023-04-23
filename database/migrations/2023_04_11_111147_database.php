@@ -66,7 +66,7 @@ class Database extends Migration
             $table->timestamps();
         });
 
-        Schema::create('accessarys', function (Blueprint $table) {
+        Schema::create('accessaries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('accessary_group_id');
             $table->string('code');
@@ -90,14 +90,15 @@ class Database extends Migration
             $table->string('note')->nullable();
             $table->timestamps();
 
-            $table->foreign('accessary_id')->references('id')->on('accessarys')->onDelete('cascade');
+            $table->foreign('accessary_id')->references('id')->on('accessaries')->onDelete('cascade');
         });
 
         Schema::create('repairs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('vehicle_infor_id');
-            $table->enum('state', ['Tiếp nhận', 'Đang xử lý', 'Hoàn thành']);
+            $table->string('code');
+            $table->enum('state', ['0', '1', '2']);
             $table->unsignedBigInteger('user_id');
             $table->timestamp('appointmentdate');
             $table->string('note')->nullable();
@@ -119,7 +120,7 @@ class Database extends Migration
             $table->timestamps();
 
             $table->foreign('repair_id')->references('id')->on('repairs')->onDelete('cascade');
-            $table->foreign('accessary_id')->references('id')->on('accessarys')->onDelete('cascade');
+            $table->foreign('accessary_id')->references('id')->on('accessaries')->onDelete('cascade');
         });
     }
 
@@ -133,7 +134,7 @@ class Database extends Migration
         Schema::dropIfExists('repair_detail');
         Schema::dropIfExists('repairs');
         Schema::dropIfExists('warehouse');
-        Schema::dropIfExists('accessarys');
+        Schema::dropIfExists('accessaries');
         Schema::dropIfExists('accessary_groups');
         Schema::dropIfExists('vehicle_infors');
         Schema::dropIfExists('units');

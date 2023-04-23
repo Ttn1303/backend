@@ -42,6 +42,33 @@ class CustomerSeeder extends Seeder
                 'sex' => 'Nam',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'D',
+                'phone' => '0123456789',
+                'address' => 'Hà Nội',
+                // 'age' => '',
+                'sex' => 'Nam',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'E',
+                'phone' => '0123456789',
+                'address' => 'Hà Nội',
+                // 'age' => '',
+                'sex' => 'Nam',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'F',
+                'phone' => '0123456789',
+                'address' => 'Hà Nội',
+                // 'age' => '',
+                'sex' => 'Nam',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ]
         ]);
     }
