@@ -13,7 +13,7 @@ class AccessaryGroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexGroup()
     {
         $group = AccessaryGroup::select('id', 'name')->get();
         return response()->json([
@@ -26,11 +26,11 @@ class AccessaryGroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function indexUnit()
     {
         $unit = Unit::select('id', 'name')->get();
         return response()->json([
-            'result'=>$unit
+            'result' => $unit
         ]);
     }
 
@@ -42,7 +42,21 @@ class AccessaryGroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $accessary_group = AccessaryGroup::create([
+            'name' => $request->name
+        ]);
+
+        if ($accessary_group) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Thêm thành công'
+            ]);
+        }
+
+        return response()->json([
+            'status' => 401,
+            'message' => 'Thêm không thành công'
+        ]);
     }
 
     /**

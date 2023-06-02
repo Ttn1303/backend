@@ -17,56 +17,101 @@ class CustomerSeeder extends Seeder
     {
         DB::table('customers')->insert([
             [
-                'name' => 'A',
+                'name' => 'Bình',
                 'phone' => '0123456789',
                 'address' => 'Hà Nội',
-                // 'age' => '',
+                'age' => '25',
                 'sex' => 'Nam',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'B',
+                'name' => 'Hoa',
                 'phone' => '0123456789',
                 'address' => 'Hà Nội',
-                // 'age' => '',
+                'age' => '30',
                 'sex' => 'Nữ',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'C',
+                'name' => 'Chung',
                 'phone' => '0123456789',
                 'address' => 'Hà Nội',
-                // 'age' => '',
+                'age' => '35',
                 'sex' => 'Nam',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'D',
+                'name' => 'Đạt',
                 'phone' => '0123456789',
                 'address' => 'Hà Nội',
-                // 'age' => '',
+                'age' => '32',
                 'sex' => 'Nam',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'E',
+                'name' => 'Trung',
                 'phone' => '0123456789',
                 'address' => 'Hà Nội',
-                // 'age' => '',
+                'age' => '31',
                 'sex' => 'Nam',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'F',
+                'name' => 'Tùng',
                 'phone' => '0123456789',
                 'address' => 'Hà Nội',
-                // 'age' => '',
+                'age' => '38',
                 'sex' => 'Nam',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'An',
+                'phone' => '0123456789',
+                'address' => 'Hà Nội',
+                'age' => '26',
+                'sex' => 'Nam',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Hà',
+                'phone' => '0123456789',
+                'address' => 'Hà Nội',
+                'age' => '30',
+                'sex' => 'Nữ',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Phú',
+                'phone' => '0123456789',
+                'address' => 'Hà Nội',
+                'age' => '38',
+                'sex' => 'Nam',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Hùng',
+                'phone' => '0123456789',
+                'address' => 'Hà Nội',
+                'age' => '24',
+                'sex' => 'Nam',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Ngọc',
+                'phone' => '0123456789',
+                'address' => 'Hà Nội',
+                'age' => '27',
+                'sex' => 'Nữ',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]

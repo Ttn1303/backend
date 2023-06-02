@@ -93,6 +93,57 @@ class VehicleInforSeeder extends Seeder
                 'kmNumber' => 50000,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
+            ],[
+                'licensePlates' => '29-K1 48607',
+                'type_vehicle' => 'Xe số',
+                'yearProduct' => 2015,
+                // 'frameNumber' => '',
+                'color' => 'Trắng',
+                'capacity' => '125cc',
+                'brand_id' => 1,
+                'model' => '',
+                'kmNumber' => 50000,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'licensePlates' => '29-K1 48608',
+                'type_vehicle' => 'Xe số',
+                'yearProduct' => 2015,
+                // 'frameNumber' => '',
+                'color' => 'Trắng',
+                'capacity' => '125cc',
+                'brand_id' => 1,
+                'model' => '',
+                'kmNumber' => 50000,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'licensePlates' => '29-K1 48609',
+                'type_vehicle' => 'Xe số',
+                'yearProduct' => 2015,
+                // 'frameNumber' => '',
+                'color' => 'Trắng',
+                'capacity' => '125cc',
+                'brand_id' => 1,
+                'model' => '',
+                'kmNumber' => 50000,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'licensePlates' => '29-K1 48610',
+                'type_vehicle' => 'Xe số',
+                'yearProduct' => 2015,
+                // 'frameNumber' => '',
+                'color' => 'Trắng',
+                'capacity' => '125cc',
+                'brand_id' => 1,
+                'model' => '',
+                'kmNumber' => 50000,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ]
         ]);
     }

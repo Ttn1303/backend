@@ -19,7 +19,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email','role'
+        'name',
+        'email',
+        'password',
+        'role',
+        'age',
+        'address',
+        'phone',
+        'sex'
     ];
 
     /**
@@ -33,5 +40,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function Repairs()
     {
         return $this->hasMany(Repair::class, 'user_id');
+    }
+    public function Receipt()
+    {
+        return $this->hasMany(Receipt::class, 'user_id');
     }
 }

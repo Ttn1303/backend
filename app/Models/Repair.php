@@ -12,12 +12,15 @@ class Repair extends Model
         'code',
         'state',
         'user_id',
+        'receipt_date',
         'appointmentdate',
+        'total',
         'note',
         'service',
         'vehicleCondition',
         'customerRequest',
-        'created_at'
+        'created_at',
+        'updated_at',
     ];
     public function Customer()
     {
@@ -30,5 +33,9 @@ class Repair extends Model
     public function VehicleInfor()
     {
         return $this->belongsTo(VehicleInfor::class,'vehicle_infor_id');
+    }
+    public function repair_detail()
+    {
+        return $this->hasOne(RepairDetail::class,'repair_id');
     }
 }

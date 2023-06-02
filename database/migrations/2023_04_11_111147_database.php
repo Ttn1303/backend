@@ -18,7 +18,11 @@ class Database extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('role',['Admin','system_admin','staff']);
+            $table->integer('age')->nullable();
+            $table->string('address');
+            $table->string('phone');
+            $table->enum('sex', ['Nam', 'Nữ'])->nullable();
+            $table->enum('role',['admin','business_staff','staff']);
             $table->timestamps();
         });
 
@@ -73,7 +77,6 @@ class Database extends Migration
             $table->string('name');
             $table->unsignedBigInteger('unit_id');
             $table->integer('price');
-            $table->integer('import_price');
             $table->integer('quantity');
             $table->string('description');
             $table->timestamps();
@@ -82,14 +85,27 @@ class Database extends Migration
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
         });
 
-        Schema::create('warehouse', function (Blueprint $table) {
+        Schema::create('receipts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('accessary_id');
-            $table->integer('import');
-            $table->integer('export');
+            $table->unsignedBigInteger('user_id');
+            $table->string('receipt_name');
+            $table->timestamp('receipt_date');
             $table->string('note')->nullable();
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
+
+        Schema::create('receipt_detail', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('receipt_id');
+            $table->unsignedBigInteger('accessary_id');
+            $table->integer('quantity');
+            $table->integer('import_price');
+            $table->integer('total');
+            $table->timestamps();
+
+            $table->foreign('receipt_id')->references('id')->on('receipts')->onDelete('cascade');
             $table->foreign('accessary_id')->references('id')->on('accessaries')->onDelete('cascade');
         });
 
@@ -98,13 +114,15 @@ class Database extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('vehicle_infor_id');
             $table->string('code');
-            $table->enum('state', ['0', '1', '2']);
+            $table->enum('state', ['1', '2', '3']);
             $table->unsignedBigInteger('user_id');
-            $table->timestamp('appointmentdate');
+            $table->timestamp('receipt_date');
+            $table->timestamp('appointment_date');
+            $table->integer('total');
             $table->string('note')->nullable();
             $table->enum('service', ['Bảo dưỡng', 'Sửa chữa']);
-            $table->string('vehicleCondition')->nullable();
-            $table->string('customerRequest')->nullable();
+            $table->string('vehicle_condition')->nullable();
+            $table->string('customer_request')->nullable();
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
@@ -133,7 +151,8 @@ class Database extends Migration
     {
         Schema::dropIfExists('repair_detail');
         Schema::dropIfExists('repairs');
-        Schema::dropIfExists('warehouse');
+        Schema::dropIfExists('receipt_detail');
+        Schema::dropIfExists('receipts');
         Schema::dropIfExists('accessaries');
         Schema::dropIfExists('accessary_groups');
         Schema::dropIfExists('vehicle_infors');

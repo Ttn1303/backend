@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -17,18 +18,40 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->post('/login', 'AuthController@postLogin');
+$router->post('/logout', 'AuthController@logout');
+
 $router->get('/user', 'UserController@index');
+$router->get('/user/{id}', 'UserController@show');
+$router->post('/user/create', 'UserController@store');
+$router->post('/user/update/{id}', 'UserController@update');
+$router->delete('/user/delete/{id}', 'UserController@destroy');
+
 $router->get('/customers', 'CustomerController@index');
 $router->get('/brand', 'BrandController@index');
-// $router->get('/vehicle-infor', 'VehicleInforController@index');
 
 $router->get('/accessary', 'AccessaryController@index');
+$router->get('/accessary/listUser', 'AccessaryController@listUser');
+$router->get('/accessary/{id}', 'AccessaryController@show');
+$router->post('/accessary/create', 'AccessaryController@store');
+$router->post('/accessary/add-quantity/{id}', 'AccessaryController@addQuantity');
 $router->delete('/accessary/delete/{id}', 'AccessaryController@destroy');
-$router->get('/accessary-group/group', 'AccessaryGroupController@index');
-$router->get('/accessary-group/unit', 'AccessaryGroupController@create');
+
+$router->get('/accessary-group/group', 'AccessaryGroupController@indexGroup');
+$router->get('/accessary-group/unit', 'AccessaryGroupController@indexUnit');
+$router->post('/accessary-group/create', 'AccessaryGroupController@store');
 
 $router->get('/repair', 'RepairController@index');
+$router->get('/repair/transaction', 'RepairController@transaction');
+$router->get('/repair/sale', 'RepairController@sales');
 $router->get('/repair/{id}', 'RepairController@show');
-$router->get('/add-repair', 'RepairController@addRepair');
-$router->delete('repair/delete/{id}', 'RepairController@deleteRepair');
-$router->get('/search', 'RepairController@search');
+$router->post('/repair/create', 'RepairController@store');
+$router->post('/repair/{id}', 'RepairController@update');
+$router->delete('/repair/delete/{id}', 'RepairController@destroy');
+
+$router->get('/repair-detail/{id}', 'RepairDetailController@show');
+$router->post('/repair-detail/add-accessary-quantity/{id}', 'RepairDetailController@addAccessaryQuantity');
+$router->post('/repair-detail/update-repair/{id}', 'RepairDetailController@update');
+$router->post('repair-detail/delete/{id}', 'RepairDetailController@destroy');
+
+$router->get('/receipt', 'ReceiptController@index');

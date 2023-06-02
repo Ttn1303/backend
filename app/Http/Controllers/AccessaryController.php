@@ -3,43 +3,142 @@
 namespace App\Http\Controllers;
 
 use App\Models\Accessary;
+use App\Models\Receipt;
+use App\Models\ReceiptDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AccessaryController extends Controller
 {
+    public function __construct(Accessary $model)
+    {
+        $this->model = $model;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $accessary = Accessary::with([
+        $query = $this->model->with([
             'AccessaryGroup' => function ($query) {
                 return $query->select('id', 'name');
             },
-            'Unit' => function ($query) { 
-                return $query->select('id','name');
-            }
-        ])
-        // ->orderBy('created_at', 'desc')
-            ->get();
-        // $group = Accessary::with('Group', function ($sub) use ($accessary) {
-        //     return $sub->where('id', $accessary->accessary_group_id)->select(['id', 'name']);
-        // });
+            'Unit' => function ($query) {
+                return $query->select('id', 'name');
+            },
+        ]);
+
+        if ($request->group != '') {
+            $query = $query->where('accessary_group_id', $request->group);
+        }
+
+        if ($request->page_size != '') {
+            $query = $query->paginate($request->page_size);
+        } else {
+            $query = $query->paginate(10);
+        }
+
         return response()->json([
-            'result' => $accessary
+            'result' => $query
         ]);
     }
+
+    public function addQuantity($id, Request $request)
+    {
+        $accessary = Accessary::where('id', $id)->first();
+        // $accessary1 = Accessary::whereIn('id', $id)->get();
+        // foreach ($accessary1 as $value) {
+        //     if (!$value) {
+        //         return response()->json([
+        //             'status' => 401,
+        //             'message' => 'Không tìm thấy bản ghi'
+        //         ]);
+        //     }
+    
+        //     $receipt = Receipt::create([
+        //         'user_id' => $request->user_id,
+        //         'receipt_name' => $request->receipt_name,
+        //         'receipt_date' => $request->date,
+        //         'total' => $request->quantity * $request->import_price,
+        //         'note' => $request->note
+        //     ]);
+    
+        //     $receipt_detail = ReceiptDetail::create([
+        //         'receipt_id' => $receipt->id,
+        //         'accessary_id' => $accessary->id,
+        //         'quantity' => $request->quantity,
+        //         'import_price' => $request->import_price
+        //     ]);
+    
+        //     $result = Accessary::where('id', $id)->update([
+        //         'quantity' => $accessary->quantity + $request->quantity
+        //     ]);
+    
+        //     if ($receipt && $receipt_detail && $result) {
+        //         return response()->json([
+        //             'status' => 200,
+        //             'message' => 'Thêm thành công'
+        //         ]);
+        //     }
+    
+        //     return response()->json([
+        //         'status' => 401,
+        //         'message' => 'Thêm không thành công'
+        //     ]);
+        // }
+        if (!$accessary) {
+            return response()->json([
+                'status' => 401,
+                'message' => 'Không tìm thấy bản ghi'
+            ]);
+        }
+
+        $receipt = Receipt::create([
+            'user_id' => $request->user_id,
+            'receipt_name' => $request->receipt_name,
+            'receipt_date' => $request->date,
+            'total' => $request->quantity * $request->import_price,
+            'note' => $request->note
+        ]);
+
+        $receipt_detail = ReceiptDetail::create([
+            'receipt_id' => $receipt->id,
+            'accessary_id' => $accessary->id,
+            'quantity' => $request->quantity,
+            'import_price' => $request->import_price
+        ]);
+
+        $result = Accessary::where('id', $id)->update([
+            'quantity' => $accessary->quantity + $request->quantity
+        ]);
+
+        if ($receipt && $receipt_detail && $result) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Thêm thành công'
+            ]);
+        }
+
+        return response()->json([
+            'status' => 401,
+            'message' => 'Thêm không thành công'
+        ]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function listUser()
     {
-        //
+        $user = User::select('id', 'name', 'role')->get();
+        return response()->json([
+            'result' => $user
+        ]);
     }
 
     /**
@@ -50,7 +149,27 @@ class AccessaryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $accessary = Accessary::create([
+            'accessary_group_id' => $request->accessary_group_id,
+            'code' => $request->code,
+            'name' => $request->name,
+            'unit_id' => $request->unit_id,
+            'price' => $request->price,
+            'import_price' => $request->import_price,
+            'description' => $request->description
+        ]);
+
+        if ($accessary) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Thêm thành công'
+            ]);
+        }
+
+        return response()->json([
+            'status' => 401,
+            'message' => 'Thêm không thành công'
+        ]);
     }
 
     /**
@@ -61,7 +180,11 @@ class AccessaryController extends Controller
      */
     public function show($id)
     {
-        //
+        $accesrary = Accessary::select('id', 'name')->where('id', $id)->first();
+
+        return response()->json([
+            'result' => $accesrary
+        ]);
     }
 
     /**
@@ -102,6 +225,7 @@ class AccessaryController extends Controller
                 'message' => 'Không tìm thấy bản ghi'
             ]);
         }
+
         $result = Accessary::where('id', $accessary->id)->delete();
         if ($result) {
             return response()->json([
@@ -109,6 +233,7 @@ class AccessaryController extends Controller
                 'message' => 'Xóa thành công'
             ]);
         }
+
         return response()->json([
             'status' => 401,
             'message' => 'Xóa không thành công'

@@ -18,68 +18,150 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            // [
-            //     'name' => 'A',
-            //     'email' => 'user1@gmail.com',
-            //     'password' => Hash::make('123456'),
-            //     'created_at' => Carbon::now(),
-            //     'updated_at' => Carbon::now()
-            // ],
-            // [
-            //     'name' => 'B',
-            //     'email' => 'user2@gmail.com',
-            //     'password' => Hash::make('123456'),
-            //     'created_at' => Carbon::now(),
-            //     'updated_at' => Carbon::now()
-            // ],
             [
-                'name' => 'C',
+                'name' => 'Anh',
+                'email' => 'user1@gmail.com',
+                'password' => Hash::make('123456'),
+                'age' => 35,
+                'address' => 'Hà Nội',
+                'phone' => '0123456789',
+                'sex' => 'Nam',
+                'role' => 'admin',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Bình',
+                'email' => 'user2@gmail.com',
+                'password' => Hash::make('123456'),
+                'age' => 35,
+                'address' => 'Hà Nội',
+                'phone' => '0123456789',
+                'sex' => 'Nam',
+                'role' => 'admin',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Hà',
                 'email' => 'user3@gmail.com',
                 'password' => Hash::make('123456'),
+                'age' => 35,
+                'address' => 'Hà Nội',
+                'phone' => '0123456789',
+                'sex' => 'Nữ',
+                'role' => 'admin',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Ngân',
+                'email' => 'user4@gmail.com',
+                'password' => Hash::make('123456'),
+                'age' => 25,
+                'address' => 'Hà Nội',
+                'phone' => '0123456789',
+                'sex' => 'Nữ',
+                'role' => 'business_staff',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Hằng',
+                'email' => 'user5@gmail.com',
+                'password' => Hash::make('123456'),
+                'age' => 28,
+                'address' => 'Hà Nội',
+                'phone' => '0123456789',
+                'sex' => 'Nữ',
+                'role' => 'business_staff',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Thảo',
+                'email' => 'user6@gmail.com',
+                'password' => Hash::make('123456'),
+                'age' => 24,
+                'address' => 'Hà Nội',
+                'phone' => '0123456789',
+                'sex' => 'Nữ',
+                'role' => 'business_staff',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Nam',
+                'email' => 'user7@gmail.com',
+                'password' => Hash::make('123456'),
+                'age' => 35,
+                'address' => 'Hà Nội',
+                'phone' => '0123456789',
+                'sex' => 'Nam',
                 'role' => 'staff',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'Nhân viên 1',
-                'email' => 'user' . Str::random(8) . '3@gmail.com',
+                'name' => 'Dũng',
+                'email' => 'user8@gmail.com',
                 'password' => Hash::make('123456'),
+                'age' => 35,
+                'address' => 'Hà Nội',
+                'phone' => '0123456789',
+                'sex' => 'Nam',
                 'role' => 'staff',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'Nhân viên 2',
-                'email' => 'user' . Str::random(8) . '3@gmail.com',
+                'name' => 'Tài',
+                'email' => 'user9@gmail.com',
                 'password' => Hash::make('123456'),
+                'age' => 35,
+                'address' => 'Hà Nội',
+                'phone' => '0123456789',
+                'sex' => 'Nam',
                 'role' => 'staff',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'Nhân viên 3',
-                'email' => 'user' . Str::random(8) . '3@gmail.com',
+                'name' => 'Huy',
+                'email' => 'user10@gmail.com',
                 'password' => Hash::make('123456'),
+                'age' => 35,
+                'address' => 'Hà Nội',
+                'phone' => '0123456789',
+                'sex' => 'Nam',
                 'role' => 'staff',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'Nhân viên 4',
-                'email' => 'user' . Str::random(8) . '3@gmail.com',
+                'name' => 'Quân',
+                'email' => 'user11@gmail.com',
                 'password' => Hash::make('123456'),
+                'age' => 35,
+                'address' => 'Hà Nội',
+                'phone' => '0123456789',
+                'sex' => 'Nam',
                 'role' => 'staff',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'Nhân viên 5',
-                'email' => 'user' . Str::random(8) . '3@gmail.com',
+                'name' => 'Đức',
+                'email' => 'user12@gmail.com',
                 'password' => Hash::make('123456'),
+                'age' => 35,
+                'address' => 'Hà Nội',
+                'phone' => '0123456789',
+                'sex' => 'Nam',
                 'role' => 'staff',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
-            ],
+            ]
         ]);
     }
 }

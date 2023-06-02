@@ -16,7 +16,6 @@ class Accessary extends Model
         'name',
         'unit_id',
         'price',
-        'import_price',
         'quantity',
         'description'
     ];
@@ -28,8 +27,12 @@ class Accessary extends Model
     {
         return $this->belongsTo(Unit::class,'unit_id');
     }
-    public function WareHouses()
+    public function ReceiptDetail()
     {
-        return $this->hasMany(WareHouse::class,'accessary_id');
+        return $this->hasMany(RepairDetail::class,'accessary_id');
+    }
+    public function repair_detail()
+    {
+        return $this->belongsToMany(RepairDetail::class, 'accessary_id');
     }
 }
