@@ -18,7 +18,6 @@ class RepairController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
@@ -61,7 +60,6 @@ class RepairController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -138,15 +136,13 @@ class RepairController extends Controller
 
         if ($repair && $customer && $vehicle) {
             return response()->json([
-                'status' => 200,
                 'message' => 'Thêm thành công'
-            ]);
+            ], 200);
         }
 
         return response()->json([
-            'status' => 401,
             'message' => 'Thêm không thành công'
-        ]);
+        ], 401);
     }
 
     /**
@@ -165,16 +161,14 @@ class RepairController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $repair = Repair::where('id', $id)->first();
         if (!$repair) {
             return response()->json([
-                'status' => 401,
                 'message' => 'Không tìm thấy bản ghi'
-            ]);
+            ], 404);
         }
 
         $result = Repair::where('id', $id)->update([
@@ -183,46 +177,40 @@ class RepairController extends Controller
 
         if ($result) {
             return response()->json([
-                'status' => 200,
                 'message' => 'Sửa thành công'
-            ]);
+            ], 200);
         }
 
         return response()->json([
-            'status' => 401,
             'message' => 'Sửa không thành công'
-        ]);
+        ], 401);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $repair = Repair::where('id', $id)->first();
         if (!$repair) {
             return response()->json([
-                'status' => 401,
                 'message' => 'Không tìm thấy bản ghi'
-            ]);
+            ], 404);
         }
 
         RepairDetail::where('repair_id', $repair->id)->delete();
         $result = Repair::where('id', $repair->id)->delete();
         if ($result) {
             return response()->json([
-                'status' => 200,
                 'message' => 'Xóa thành công'
-            ]);
+            ], 200);
         }
 
         return response()->json([
-            'status' => 401,
             'message' => 'Xóa không thành công'
-        ]);
+        ], 401);
     }
 
     public function transaction()
@@ -253,7 +241,7 @@ class RepairController extends Controller
         ]);
     }
 
-    public function sales()
+    public function dashboard()
     {
         // get 12 month
         $monthOne = Carbon::now()->startOfYear()->format('m');

@@ -14,7 +14,6 @@ class RepairDetailController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -48,14 +47,13 @@ class RepairDetailController extends Controller
                 RepairDetail::where('id', $updateRepairDetail->id)->update([
                     'quantity' => $updateRepairDetail->quantity + $request->quantity
                 ]);
-                return 'update';
+                return 'Thêm phụ tùng thành công';
             }
             RepairDetail::create([
                 'repair_id' => $repair->id,
                 'accessary_id' => $request->accessary,
                 'quantity' => $request->quantity
             ]);
-            return 'xyz';
         }
     }
 
@@ -66,9 +64,8 @@ class RepairDetailController extends Controller
             $repair = Repair::where('id', $id)->first();
             if (!$repair) {
                 return response()->json([
-                    'status' => 401,
                     'message' => 'Không tìm thấy bản ghi'
-                ]);
+                ], 404);
             }
             Repair::where('id', $id)->update(['state' => 3, 'total' => $request->total]);
 
@@ -76,21 +73,18 @@ class RepairDetailController extends Controller
                 $productById = Accessary::where('id', $product['accessary_id'])->first();
                 if (!$productById) {
                     return response()->json([
-                        'status' => 401,
                         'message' => 'Không tìm thấy bản ghi'
-                    ]);
+                    ], 404);
                 }
 
                 if ($productById->quantity <= 0) {
                     return response()->json([
-                        'status' => 401,
                         'message' => 'Số lượng tồn kho không đủ'
-                    ]);
+                    ], 401);
                 } elseif ($product['quantity'] > $productById->quantity) {
                     return response()->json([
-                        'status' => 401,
                         'message' => 'Số lượng nhập vào lớn hơn số lượng tồn kho. xin vui lòng kiểm tra lại'
-                    ]);
+                    ], 401);
                 }
                 Accessary::where('id', $product['accessary_id'])->update(['quantity' => $productById->quantity - $product['quantity']]);
             }
@@ -109,38 +103,33 @@ class RepairDetailController extends Controller
         $repair = Repair::where('id', $id)->first();
         if (!$repair) {
             return response()->json([
-                'status' => 401,
                 'message' => 'Không tìm thấy bản ghi'
-            ]);
+            ], 404);
         }
 
         $repairDetail = RepairDetail::where('repair_id', $repair->id)->get();
         if (!$repairDetail) {
             return response()->json([
-                'status' => 401,
                 'message' => 'Không tìm thấy bản ghi'
-            ]);
+            ], 404);
         }
 
         $deleteAccessary = $repairDetail->where('id', $request->accessary_id)->first();
         if (!$deleteAccessary) {
             return response()->json([
-                'status' => 401,
                 'message' => 'Không tìm thấy bản ghi'
-            ]);
+            ], 404);
         }
         $result = $deleteAccessary->delete();
 
         if ($result) {
             return response()->json([
-                'status' => 200,
-                'message' => 'Success'
-            ]);
+                'message' => 'Xóa thành công'
+            ], 200);
         }
 
         return response()->json([
-            'status' => 401,
-            'message' => 'Failed'
-        ]);
+            'message' => 'Xóa không thành công'
+        ], 401);
     }
 }

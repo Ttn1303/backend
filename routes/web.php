@@ -19,7 +19,7 @@ $router->get('/', function () use ($router) {
 });
 
 $router->post('/login', 'AuthController@postLogin');
-$router->post('/logout', 'AuthController@logout');
+$router->post('/change-password', 'AuthController@change_password');
 
 $router->get('/user', 'UserController@index');
 $router->get('/user/{id}', 'UserController@show');
@@ -31,6 +31,7 @@ $router->get('/customers', 'CustomerController@index');
 $router->get('/brand', 'BrandController@index');
 
 $router->get('/accessary', 'AccessaryController@index');
+$router->get('/accessary/list', 'AccessaryController@list');
 $router->get('/accessary/listUser', 'AccessaryController@listUser');
 $router->get('/accessary/{id}', 'AccessaryController@show');
 $router->post('/accessary/create', 'AccessaryController@store');
@@ -43,7 +44,7 @@ $router->post('/accessary-group/create', 'AccessaryGroupController@store');
 
 $router->get('/repair', 'RepairController@index');
 $router->get('/repair/transaction', 'RepairController@transaction');
-$router->get('/repair/sale', 'RepairController@sales');
+$router->get('/repair/dashboard', 'RepairController@dashboard');
 $router->get('/repair/{id}', 'RepairController@show');
 $router->post('/repair/create', 'RepairController@store');
 $router->post('/repair/{id}', 'RepairController@update');
@@ -55,3 +56,4 @@ $router->post('/repair-detail/update-repair/{id}', 'RepairDetailController@updat
 $router->post('repair-detail/delete/{id}', 'RepairDetailController@destroy');
 
 $router->get('/receipt', 'ReceiptController@index');
+$router->post('/receipt/sale', 'ReceiptController@sales');

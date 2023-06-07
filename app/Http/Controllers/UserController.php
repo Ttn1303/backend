@@ -15,7 +15,6 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
@@ -50,7 +49,6 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -67,22 +65,19 @@ class UserController extends Controller
 
         if ($user) {
             return response()->json([
-                'status' => 200,
                 'message' => 'Thêm thành công'
-            ]);
+            ], 200);
         }
 
         return response()->json([
-            'status' => 401,
             'message' => 'Thêm không thành công'
-        ]);
+        ], 401);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -109,16 +104,14 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $user = User::where('id', $id)->first();
         if (!$user) {
             return response()->json([
-                'status' => 401,
                 'message' => 'Không tìm thấy bản ghi'
-            ]);
+            ], 404);
         }
 
         $result = User::where('id', $id)->update([
@@ -130,44 +123,38 @@ class UserController extends Controller
 
         if ($result) {
             return response()->json([
-                'status' => 200,
                 'message' => 'Sửa thành công'
-            ]);
+            ], 200);
         }
 
         return response()->json([
-            'status' => 401,
             'message' => 'Sửa không thành công'
-        ]);
+        ], 401);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $user = User::where('id', $id)->first();
         if (!$user) {
             return response()->json([
-                'status' => 401,
                 'message' => 'Không tìm thấy bản ghi'
-            ]);
+            ], 404);
         }
 
         $result = User::where('id', $user->id)->delete();
         if ($result) {
             return response()->json([
-                'status' => 200,
                 'message' => 'Xóa thành công'
-            ]);
+            ], 200);
         }
 
         return response()->json([
-            'status' => 401,
             'message' => 'Xóa không thành công'
-        ]);
+        ], 401);
     }
 }

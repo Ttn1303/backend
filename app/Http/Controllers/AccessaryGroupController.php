@@ -11,7 +11,6 @@ class AccessaryGroupController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function indexGroup()
     {
@@ -24,7 +23,6 @@ class AccessaryGroupController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function indexUnit()
     {
@@ -38,7 +36,6 @@ class AccessaryGroupController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -48,15 +45,13 @@ class AccessaryGroupController extends Controller
 
         if ($accessary_group) {
             return response()->json([
-                'status' => 200,
                 'message' => 'Thêm thành công'
-            ]);
+            ], 200);
         }
 
         return response()->json([
-            'status' => 401,
             'message' => 'Thêm không thành công'
-        ]);
+        ], 401);
     }
 
     /**

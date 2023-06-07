@@ -17,7 +17,6 @@ class AccessaryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
@@ -44,6 +43,21 @@ class AccessaryController extends Controller
             'result' => $query
         ]);
     }
+    public function list()
+    {
+        $query = $this->model->with([
+            'AccessaryGroup' => function ($query) {
+                return $query->select('id', 'name');
+            },
+            'Unit' => function ($query) {
+                return $query->select('id', 'name');
+            },
+        ])->get();
+
+        return response()->json([
+            'result' => $query
+        ]);
+    }
 
     public function addQuantity($id, Request $request)
     {
@@ -56,7 +70,7 @@ class AccessaryController extends Controller
         //             'message' => 'Không tìm thấy bản ghi'
         //         ]);
         //     }
-    
+
         //     $receipt = Receipt::create([
         //         'user_id' => $request->user_id,
         //         'receipt_name' => $request->receipt_name,
@@ -64,25 +78,25 @@ class AccessaryController extends Controller
         //         'total' => $request->quantity * $request->import_price,
         //         'note' => $request->note
         //     ]);
-    
+
         //     $receipt_detail = ReceiptDetail::create([
         //         'receipt_id' => $receipt->id,
         //         'accessary_id' => $accessary->id,
         //         'quantity' => $request->quantity,
         //         'import_price' => $request->import_price
         //     ]);
-    
+
         //     $result = Accessary::where('id', $id)->update([
         //         'quantity' => $accessary->quantity + $request->quantity
         //     ]);
-    
+
         //     if ($receipt && $receipt_detail && $result) {
         //         return response()->json([
         //             'status' => 200,
         //             'message' => 'Thêm thành công'
         //         ]);
         //     }
-    
+
         //     return response()->json([
         //         'status' => 401,
         //         'message' => 'Thêm không thành công'
@@ -90,9 +104,8 @@ class AccessaryController extends Controller
         // }
         if (!$accessary) {
             return response()->json([
-                'status' => 401,
                 'message' => 'Không tìm thấy bản ghi'
-            ]);
+            ], 404);
         }
 
         $receipt = Receipt::create([
@@ -116,22 +129,19 @@ class AccessaryController extends Controller
 
         if ($receipt && $receipt_detail && $result) {
             return response()->json([
-                'status' => 200,
                 'message' => 'Thêm thành công'
-            ]);
+            ], 200);
         }
 
         return response()->json([
-            'status' => 401,
             'message' => 'Thêm không thành công'
-        ]);
+        ], 401);
     }
 
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function listUser()
     {
@@ -145,7 +155,6 @@ class AccessaryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -161,22 +170,19 @@ class AccessaryController extends Controller
 
         if ($accessary) {
             return response()->json([
-                'status' => 200,
                 'message' => 'Thêm thành công'
-            ]);
+            ], 200);
         }
 
         return response()->json([
-            'status' => 401,
             'message' => 'Thêm không thành công'
-        ]);
+        ], 401);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -214,29 +220,25 @@ class AccessaryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $accessary = Accessary::where('id', $id)->first();
         if (!$accessary) {
             return response()->json([
-                'status' => 401,
                 'message' => 'Không tìm thấy bản ghi'
-            ]);
+            ], 404);
         }
 
         $result = Accessary::where('id', $accessary->id)->delete();
         if ($result) {
             return response()->json([
-                'status' => 200,
                 'message' => 'Xóa thành công'
-            ]);
+            ], 200);
         }
 
         return response()->json([
-            'status' => 401,
             'message' => 'Xóa không thành công'
-        ]);
+        ], 401);
     }
 }

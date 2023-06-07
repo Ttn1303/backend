@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -16,30 +15,36 @@ class AuthController extends Controller
         $countUser = $user->count();
         $infor = $user->select('*')->get();
 
-        if (!$userInformation) {
-            return response()->json([
-                'status' => 401,
-                'message' => 'Tài khoản mật khẩu là bắt buộc'
-            ]);
-        }
-
         if ($countUser > 0 && Hash::check($request['password'], $userInformation->password)) {
             return response()->json([
-                'status' => 200,
                 'message' => 'Đăng nhập thành công',
                 'result' => $infor
-            ]);
+            ], 200);
 
         } else {
             return response()->json([
-                'status' => 401,
                 'message' => 'Tài khoản hoặc mật khẩu không đúng'
-            ]);
+            ], 401);
         }
     }
 
-    public function logout()
+    public function change_password(Request $request)
     {
-        Auth::logout();
+        $user = User::where('email', $request->email);
+        $userInformation = $user->first();
+        $countUser = $user->count();
+
+        if ($countUser < 0 || $countUser > 0 && !Hash::check($request->old_password, $userInformation->password)) {
+            return response()->json([
+                'message' => 'Tài khoản hoặc mật khẩu không đúng'
+            ], 401);
+        }
+        User::where('email', $request->email)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        return response()->json([
+            'message' => 'Đổi mật khẩu thành công'
+        ], 200);
     }
 }

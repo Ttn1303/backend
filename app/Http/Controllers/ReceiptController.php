@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Receipt;
 use App\Models\ReceiptDetail;
+use App\Models\Repair;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReceiptController extends Controller
@@ -36,6 +37,24 @@ class ReceiptController extends Controller
         }
         return response()->json([
             'result' => $receipt
+        ]);
+    }
+
+    public function sales(Request $request)
+    {
+        $startDate = Carbon::parse($request->start ?? '')->startOfDay()->format('Y-m-d H:i:s');
+        $endDate = Carbon::parse($request->end ?? '')->endOfDay()->format('Y-m-d H:i:s');
+        $transactions = Repair::with([
+            'VehicleInfor' => function ($query) {
+                return $query->select('id', 'licensePlates');
+            },
+            'Customer' => function ($query) {
+                return $query->select('id', 'name', 'phone', 'address');
+            }
+        ])->whereBetween('updated_at', [$startDate, $endDate])->get();
+
+        return response()->json([
+            'result' => $transactions
         ]);
     }
 }
